@@ -25,7 +25,7 @@ int main() {
 	int proc_num;
 	MPI_Init(NULL,NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &num_processes);
-	MPI_Comm_rank(MPI_COMM_WORLD< &proc_num);
+	MPI_Comm_rank(MPI_COMM_WORLD, &proc_num);
 
   long long global_sum = 0;
   
@@ -56,5 +56,5 @@ int main() {
   }
   
   cout << "Total twin primes <= " << r << " = " << sum << endl;
-  
+
 }
