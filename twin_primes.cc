@@ -44,8 +44,8 @@ int main() {
     long long r;
     long long local_sum;
     MPI_Recv(&r, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    long long start = max(3, ((proc_num-1)*r/num_processes));
-    long long end = min((int)r, (proc_num*r/num_processes-1)); 
+    long long start = max((long long)3, ((proc_num-1)*r/num_processes));
+    long long end = min((r, (proc_num*r/num_processes-1)); 
     for (long long j=start;j<=end;j+=2) {
       bool curr = is_prime(j);
       if (last & curr) {
