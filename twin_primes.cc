@@ -55,4 +55,7 @@ int main() {
     }
     MPI_Send(&local_sum, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
   }
+
+  MPI_Finalize();
+  return 0;
 }
