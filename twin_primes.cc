@@ -27,7 +27,7 @@ int main() {
   long long global_sum = 0;
   
   if (proc_num == 0) {
-    long long r;
+    long long r = 0;
     cin >> r;
     for (int i = 1; i < num_processes; ++i) {
       MPI_Send(&r, 1, MPI_LONG_LONG, i, 0, MPI_COMM_WORLD);
@@ -40,8 +40,8 @@ int main() {
     cout << "Total twin primes <= " << r << " = " << global_sum << endl;
   } else {
     bool last = false;
-    long long r;
-    long long local_sum;
+    long long r = 0;
+    long long local_sum = 0;
     MPI_Recv(&r, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     long long start = max((long long)3, ((proc_num-1)*r/num_processes));
     if (start % 2 == 0) {
