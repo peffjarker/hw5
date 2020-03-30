@@ -48,6 +48,9 @@ int main() {
       start++;
     }
     long long end = min(r, (proc_num*r/(num_processes-1)-1)); 
+    if (end % 2 == 0) {
+      end--;
+    }
     cout << proc_num << " start: " << start << " end: " << end << endl;
     for (long long j=start;j<=end;j+=2) {
       bool curr = is_prime(j);
