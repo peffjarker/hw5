@@ -51,7 +51,7 @@ int main() {
     if (end % 2 == 0) {
       end--;
     }
-    cout << proc_num << " start: " << start << " end: " << end << endl;
+    //cout << proc_num << " start: " << start << " end: " << end << endl;
     for (long long j=start;j<=end;j+=2) {
       bool curr = is_prime(j);
       if (last & curr) {
@@ -59,7 +59,7 @@ int main() {
       }
       last = curr;
     }
-    cout << "process sum:" << local_sum << endl;
+    //cout << "process sum:" << local_sum << endl;
     MPI_Send(&local_sum, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD);
   }
 
