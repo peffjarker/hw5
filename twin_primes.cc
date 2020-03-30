@@ -33,9 +33,11 @@ int main() {
     long long r;
     cin >> r;
     for (int i = 1; i < num_processes; ++i) {
-      MPI_Send(&r, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+      MPI_Send(&r, 1, MPI_LONG_LONG, i, 0, MPI_COMM_WORLD);
+    }
+    for (int i = 1; i < num_processes; ++i) {
       int process_sum;
-      MPI_Recv(&process_sum, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      MPI_Recv(&process_sum, 1, MPI_LONG_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       global_sum += process_sum;
     }
     cout << "Total twin primes <= " << r << " = " << global_sum << endl;
@@ -43,8 +45,11 @@ int main() {
     bool last = false;
     long long r;
     long long local_sum;
-    MPI_Recv(&r, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(&r, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     long long start = max((long long)3, ((proc_num-1)*r/num_processes));
+    if (start % 2 == 0) {
+      start++;
+    }
     long long end = min(r, (proc_num*r/num_processes-1)); 
     for (long long j=start;j<=end;j+=2) {
       bool curr = is_prime(j);
@@ -53,7 +58,7 @@ int main() {
       }
       last = curr;
     }
-    MPI_Send(&local_sum, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+    MPI_Send(&local_sum, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD);
   }
 
   MPI_Finalize();
