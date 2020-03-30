@@ -43,11 +43,11 @@ int main() {
     long long r = 0;
     long long local_sum = 0;
     MPI_Recv(&r, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    long long start = max((long long)3, ((proc_num-1)*r/num_processes));
+    long long start = max((long long)3, ((proc_num-1)*r/(num_processes-1)));
     if (start % 2 == 0) {
       start++;
     }
-    long long end = min(r, (proc_num*r/num_processes-1)); 
+    long long end = min(r, (proc_num*r/(num_processes-1)-1)); 
     cout << proc_num << " start: " << start << " end: " << end << endl;
     for (long long j=start;j<=end;j+=2) {
       bool curr = is_prime(j);
@@ -56,7 +56,7 @@ int main() {
       }
       last = curr;
     }
-    cout << "process sum:" << local_sum << endl;
+    cout << "process sum:" local_sum << endl;
     MPI_Send(&local_sum, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD);
   }
 
