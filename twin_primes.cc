@@ -8,7 +8,7 @@ bool is_prime(long long p) {
   long long i;
   
   i=2;
-  while (i*i<p) {
+  while (i*i<=p) {
     if (p%i == 0) {
       return false;
     }
