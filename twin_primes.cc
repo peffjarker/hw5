@@ -56,7 +56,7 @@ int main() {
       }
       last = curr;
     }
-    cout << local_sum << endl;
+    cout << "process sum:" local_sum << endl;
     MPI_Send(&local_sum, 1, MPI_LONG_LONG, 0, 0, MPI_COMM_WORLD);
   }
 
